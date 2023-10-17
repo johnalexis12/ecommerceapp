@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useCart } from "../context/CartContext";
 
 function ProductList() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { cart, addToCart } = useCart();
 
-  useEffect(() => {
+  const [products, setProducts] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
     setTimeout(() => {
       const data = [
         { id: 1, name: "Product 1", price: 10.99 },
@@ -25,7 +28,8 @@ function ProductList() {
         <ul>
           {products.map((product) => (
             <li key={product.id}>
-              {product.name} - ${product.price}
+              {product.name} - ${product.price}{" "}
+              <button onClick={() => addToCart(product)}>Add to Cart</button>
             </li>
           ))}
         </ul>

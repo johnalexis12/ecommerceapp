@@ -1,26 +1,18 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import React from "react";
+import { useAuth } from "../context/AuthContext";
 
 function UserAuthentication() {
-  const { user, setUser } = useContext(AuthContext);
-
-  const handleLogin = () => {
-    setUser({ username: "user123" });
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-  };
+  const { user, login, logout } = useAuth();
 
   return (
     <div>
+      <h2>User Authentication</h2>
       {user ? (
         <p>
-          Welcome, {user.username}!{" "}
-          <button onClick={handleLogout}>Logout</button>
+          Welcome, {user.username}! <button onClick={logout}>Logout</button>
         </p>
       ) : (
-        <button onClick={handleLogin}>Login</button>
+        <button onClick={login}>Login</button>
       )}
     </div>
   );
